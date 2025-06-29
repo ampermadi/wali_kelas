@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Siswa;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\SiswaExport;
+use App\Imports\SiswaImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
@@ -61,4 +62,22 @@ class SiswaController extends Controller
     {
         return Excel::download(new SiswaExport, 'data-siswa.xlsx');
     }
+
+    public function importExcel(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls'
+        ]);
+
+        Excel::import(new SiswaImport, $request->file('file'));
+
+        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil diimport.');
+    }
+
+    // public function show($id)
+    // {
+    //     $siswa = Siswa::findOrFail($id);
+    //     return view('siswa.show', compact('siswa'));
+    // }
+
 }

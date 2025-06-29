@@ -12,6 +12,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
+                <th>No</th>
                 <th>Nama Siswa</th>
                 <th>Tanggal</th>
                 <th>Status</th>
@@ -20,6 +21,7 @@
         <tbody>
         @foreach($presensi as $p)
             <tr>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $p->siswa->nama }}</td>
                 <td>{{ $p->tanggal }}</td>
                 <td>{{ $p->status }}</td>

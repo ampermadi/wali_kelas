@@ -18,6 +18,7 @@
     <table>
         <thead>
             <tr>
+                <th>No</th>
                 <th>NIS</th>
                 <th>Nama</th>
                 <th>Kelas</th>
@@ -26,9 +27,10 @@
         <tbody>
             @foreach ($siswa as $s)
                 <tr>
-                    <td>{{ $s->nis }}</td>
+                    <td align="center">{{ $loop->iteration }}</td>
+                    <td align="center">{{ $s->nis }}</td>
                     <td>{{ $s->nama }}</td>
-                    <td>{{ $s->kelas }}</td>
+                    <td align="center">{{ $s->kelas }}</td>
                 </tr>
             @endforeach
         </tbody>

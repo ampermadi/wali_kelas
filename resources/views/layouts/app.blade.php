@@ -33,6 +33,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('pelanggaran.index') }}">Pelanggaran</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('orangtua.index') }}">Orang Tua</a>
+                </li>
             </ul>
 
             <form action="{{ route('logout') }}" method="POST" class="d-flex">
