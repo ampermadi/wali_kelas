@@ -7,6 +7,8 @@ use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\PelanggaranController;
 use App\Http\Controllers\PrestasiController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrangTua\LoginController as OrangTuaLogin;
+use App\Http\Controllers\OrangTua\DashboardController as OrangTuaDashboard;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -28,6 +30,16 @@ Route::middleware('auth')->group(function () {
     Route::resource('presensi', PresensiController::class)->only(['index', 'create', 'store']);
     Route::resource('pelanggaran', PelanggaranController::class)->only(['index', 'create', 'store']);
     Route::resource('prestasi', PrestasiController::class)->only(['index', 'create', 'store']);
+});
+
+Route::prefix('orangtua')->group(function () {
+    Route::get('/login', [OrangTuaLogin::class, 'showLoginForm'])->name('orangtua.login');
+    Route::post('/login', [OrangTuaLogin::class, 'login']);
+    Route::post('/logout', [OrangTuaLogin::class, 'logout'])->name('orangtua.logout');
+
+    Route::middleware('auth:orangtua')->group(function () {
+        Route::get('/dashboard', [OrangTuaDashboard::class, 'index'])->name('orangtua.dashboard');
+    });
 });
 
 require __DIR__.'/auth.php';
