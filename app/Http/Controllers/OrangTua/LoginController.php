@@ -27,6 +27,6 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::guard('orangtua')->logout();
-        return redirect()->route('orangtua.login');
+        return redirect()->route('home');
     }
 }

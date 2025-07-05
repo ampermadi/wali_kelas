@@ -8,6 +8,7 @@
 </head>
 <body>
 
+    @if (!Request::is('/'))
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="{{ route('dashboard') }}">Wali Kelas</a>
@@ -44,10 +45,10 @@
             </form>
         </div>
     </div>
-</nav>
+    </nav>
+    @endif
 
-
-    <div class="container">
+    <div class="container mt-4">
         @yield('content')
     </div>
 

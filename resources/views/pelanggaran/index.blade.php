@@ -16,6 +16,7 @@
                 <th>Nama Siswa</th>
                 <th>Tanggal</th>
                 <th>Keterangan</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +26,14 @@
                 <td>{{ $p->siswa->nama }}</td>
                 <td>{{ $p->tanggal }}</td>
                 <td>{{ $p->keterangan }}</td>
+                <td>
+                    <a href="{{ route('pelanggaran.edit', $p->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('pelanggaran.destroy', $p->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin hapus?')">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger btn-sm">Hapus</button>
+                    </form>
+                </td>
             </tr>
         @endforeach
         </tbody>
