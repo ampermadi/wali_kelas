@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Presensi;
 use App\Models\Siswa;
+use App\Imports\PresensiImport;
 
 class PresensiController extends Controller
 {
@@ -61,5 +62,42 @@ class PresensiController extends Controller
         Presensi::destroy($id);
         return redirect()->route('presensi.index')->with('success', 'Data presensi berhasil dihapus.');
     }
+
+    public function createMassal()
+    {
+        $siswa = Siswa::orderBy('nama')->get();
+        return view('presensi.massal', compact('siswa'));
+    }
+
+    public function storeMassal(Request $request)
+    {
+        $request->validate([
+            'status.*' => 'required|in:Hadir,Sakit,Izin,Alpa'
+        ]);
+
+        $tanggal = now()->toDateString();
+
+        foreach ($request->status as $siswa_id => $status) {
+            Presensi::create([
+                'siswa_id' => $siswa_id,
+                'tanggal' => $tanggal,
+                'status' => $status
+            ]);
+        }
+
+        return redirect()->route('presensi.index')->with('success', 'Presensi massal berhasil disimpan.');
+    }
+
+    public function importExcel(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv'
+        ]);
+
+        Excel::import(new PresensiImport, $request->file('file'));
+
+        return redirect()->route('presensi.index')->with('success', 'Data presensi berhasil diimport.');
+    }
+
 
 }

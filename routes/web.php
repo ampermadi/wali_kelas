@@ -38,6 +38,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('presensi', PresensiController::class);
     Route::get('presensi/cetak-pdf', [PresensiController::class, 'cetakPdf'])->name('presensi.cetak-pdf');
     Route::get('presensi/export-excel', [PresensiController::class, 'exportExcel'])->name('presensi.export-excel');
+    Route::post('presensi/import-excel', [PresensiController::class, 'importExcel'])->name('presensi.import-excel');
+    Route::get('presensi/massal', [PresensiController::class, 'createMassal'])->name('presensi.massal');
+Route::post('presensi/massal', [PresensiController::class, 'storeMassal'])->name('presensi.storeMassal');
+
+
 
     Route::resource('pelanggaran', PelanggaranController::class);
     Route::get('pelanggaran/cetak-pdf', [PelanggaranController::class, 'cetakPdf'])->name('pelanggaran.cetak-pdf');

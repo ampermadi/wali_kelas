@@ -4,10 +4,18 @@
 <div class="container">
     <h2>Data Presensi</h2>
     <a href="{{ route('presensi.create') }}" class="btn btn-primary mb-3">Tambah Presensi</a>
+    <a href="{{ route('presensi.massal') }}" class="btn btn-primary mb-3">Input Presensi Massal</a>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+
+    <form action="{{ route('presensi.import-excel') }}" method="POST" enctype="multipart/form-data" class="d-flex mb-3">
+        @csrf
+        <input type="file" name="file" class="form-control me-2" required>
+        <button class="btn btn-primary">Import Excel</button>
+    </form>
+
 
     <table class="table table-bordered">
         <thead>

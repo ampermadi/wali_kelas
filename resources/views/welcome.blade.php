@@ -12,7 +12,7 @@
             <div class="card shadow-lg h-100 text-center border-primary">
                 <div class="card-body">
                     <h4 class="card-title text-primary mb-3">Login Admin</h4>
-                    <p class="card-text">Khusus untuk guru wali kelas sebagai admin pengelola data siswa, presensi, pelanggaran, dan prestasi.</p>
+                    <p class="card-text">Khusus untuk wali kelas sebagai admin pengelola data siswa, presensi, pelanggaran, dan prestasi.</p>
                     <a href="{{ route('login') }}" class="btn btn-primary btn-lg mt-3">Login Admin</a>
                 </div>
             </div>
